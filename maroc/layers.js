@@ -36,7 +36,7 @@
 	    });
 		
 		var currentyear = $('.year.active').attr('id')
-
+            var active_layer = 'autres'; //whatever
 	    var layerUrl = 'http://dai.cartodb.com/api/v1/viz/ag_survey_11_12/viz.json';
 	    var layerOptions = {
 	        query: "SELECT * FROM {{table_name}} WHERE tout>0 AND year=" + currentyear,
@@ -232,6 +232,7 @@
 		$('.year').click(function () {
 			$('.year').removeClass('active');
 			$(this).addClass('active');
+			LayerActions[active_layer]();
 		});
 		
 //To redraw layers with the active crop type symbolized
@@ -239,8 +240,8 @@
 	        $('.lyr').removeClass('active');
 	        $(this).addClass('active');
 	        $('h2.switch-title').text($(this).text());
-			
-	        LayerActions[$(this).attr('id')]();
+		active_layer = $(this).attr('id')
+	        LayerActions[active_layer]();
 	        $('#infowindow_template').html();
 	    })
 
